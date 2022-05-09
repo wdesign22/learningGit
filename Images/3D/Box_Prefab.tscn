@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Images/3D/Box.DAE" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/Sprite3D_Prediction.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Viewport_Prediction.gd" type="Script" id=3]
+[ext_resource path="res://Fonts/Jost-500-Medium.otf" type="DynamicFontData" id=4]
+[ext_resource path="res://Images/2D/2D_Lable.tscn" type="PackedScene" id=5]
+
+[sub_resource type="DynamicFont" id=4]
+size = 92
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 4 )
+
+[sub_resource type="Theme" id=3]
+default_font = SubResource( 4 )
+
+[sub_resource type="ViewportTexture" id=1]
+viewport_path = NodePath("Spatial_Text/Viewport")
+
+[node name="Spatial" type="Spatial"]
+
+[node name="Box" parent="." instance=ExtResource( 1 )]
+transform = Transform( 20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0 )
+
+[node name="Spatial_Text" type="Spatial" parent="."]
+transform = Transform( 0.002, 0, 0, 0, 0.002, 0, 0, 0, 0.002, 0, 0, 1.01 )
+visible = false
+
+[node name="Viewport" type="Viewport" parent="Spatial_Text"]
+size = Vector2( 1264, 1264 )
+transparent_bg = true
+handle_input_locally = false
+hdr = false
+render_target_v_flip = true
+gui_snap_controls_to_pixels = false
+script = ExtResource( 3 )
+
+[node name="Label_Prediction" type="Label" parent="Spatial_Text/Viewport"]
+margin_right = 1264.0
+margin_bottom = 1264.0
+theme = SubResource( 3 )
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+autowrap = true
+
+[node name="Sprite3D_Text" type="Sprite3D" parent="Spatial_Text"]
+transform = Transform( 1.2, 0, 0, 0, 1.2, 0, 0, 0, 1, 0, 0, 1.00924 )
+cast_shadow = 0
+pixel_size = 1.0
+double_sided = false
+alpha_cut = 2
+texture = SubResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Node2D_Lable" parent="Spatial_Text" instance=ExtResource( 5 )]
+visible = false
+position = Vector2( 140, 365 )
